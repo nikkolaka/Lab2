@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 
 import edu.uw.tcss450.uiandnavigationlab.R;
 import edu.uw.tcss450.uiandnavigationlab.databinding.FragmentHomeBinding;
+import edu.uw.tcss450.uiandnavigationlab.model.UserInfoViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +40,12 @@ public class HomeFragment extends Fragment {
         //Local access to the ViewBinding object. No need to create as Instance Var as it is only
         //used here.
         FragmentHomeBinding binding = FragmentHomeBinding.bind(requireView());
+
+
+        UserInfoViewModel model = new ViewModelProvider(getActivity())
+                .get(UserInfoViewModel.class);
+        binding.textEmail.setText(getString(R.string.label_home, model.getEmail()));
+
 
         //On button click, navigate to Second Home
         binding.buttonNext.setOnClickListener(button ->
